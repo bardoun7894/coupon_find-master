@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:coupon_find/api/services.dart';
 import 'package:coupon_find/bloc/base_bloc.dart';
 import 'package:coupon_find/Models/coupons_model.dart';
+import 'package:flutter/foundation.dart';
 import 'package:rxdart/rxdart.dart';
 
 class CouponBloc implements BaseBloc{
@@ -12,16 +13,16 @@ final _storeId =BehaviorSubject<int>();
 //final _queryController =StreamController();
 	Function(int) get getId => _id.sink.add;
 	Function(int) get getStoreId => _storeId.sink.add;
-
 Stream<List<CouponModel>>  get CouponsListView async*{
 	yield await Services.getCoupons();
+
 }
 	Stream<List<CouponModel>>  FilterCouponsListView(query) {
 		return Stream.fromFuture( Services.getCouponsFiltred(query));
 	}
-	CouponBloc(){
-	CouponsListView.listen((list)=>_couponController.add(list.length));
-
+	CouponBloc() {
+		CouponsListView.distinct().listen((list) =>
+				_couponController.add(list.length));
 	}
 	updateData(){
 print(_id.value);

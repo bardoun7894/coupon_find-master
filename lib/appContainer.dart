@@ -36,47 +36,47 @@ void initState(){
     super.initState();
 
   }
-  Widget containerBox(  String sname, int indexSelected, String image, filterList, fakList) {
+  Widget containerBox( String sname, int indexSelected, String image, folderList) {
     return GestureDetector(
       onTap: () {
         setState(() {
           selected = indexSelected;
         });
-						selected = indexSelected;
 						setState(() {
 							query =sname;
 					});
       },
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 4),
-        margin: EdgeInsets.only(top: 10, bottom: 10, right: 16),
-        height: 80,
-        width: 100,
-        decoration: BoxDecoration(
-            color: (selected != null && selected == indexSelected)
-                ? Colors.blue
-                : Colors.white,
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: Colors.grey)),
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: <Widget>[
-           Image(
-                image: NetworkImage(image),
-                width: 60,
-                height: 60,
-              ),
+      child:  Container(
+          padding: EdgeInsets.symmetric(vertical: 4),
+          margin: EdgeInsets.only(top: 10, bottom: 10, right: 16),
+          height: 80,
+          width: 100,
+          decoration: BoxDecoration(
+              color: (selected != null && selected == indexSelected)
+                  ? Colors.blue
+                  : Colors.white,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: Colors.grey)),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
 
-            Text(
-              sname,
-              style: TextStyle(
-                  color: selected == indexSelected ? Colors.white : Colors.grey,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16),
-            )
-          ],
-        ),
-      ),
+             Image(
+                  image: NetworkImage(image),
+                  width: 60,
+                  height: 60,
+                ),
+
+              Text(
+                sname,
+                style: TextStyle(
+                    color: selected == indexSelected ? Colors.white : Colors.grey,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16),
+              )
+            ],
+          ),
+        )
     );
   }
   Future<bool> showCoupons(context, String url, String image) {
@@ -228,17 +228,32 @@ void initState(){
             )
           ],
         ),
-        Container(
-            height: 130,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              shrinkWrap: true,
-              children: <Widget>[
-                for (int i = 0; i < fakList.length; i++)
-                  containerBox(fakList[i].storeName, i, fakList[i].storeImage,
-                      filterList, fakList),
-              ],
-            ))
+      StreamBuilder<List<CouponModel>> (
+    stream:  couponBloc.CouponsListView,
+    builder: (BuildContext context, AsyncSnapshot snapshot) {
+    if (snapshot.data != null) {
+    List<CouponModel> folderList = snapshot.data;
+    Map<Object, CouponModel> mp = {};
+    for (var item in folderList) {
+      mp[item.storeName] = item;
+    }
+    List<CouponModel> filteredList  = mp.values.toList();
+    return Container(
+              height: 130,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+                children: <Widget>[
+                  for (int i = 0; i< filteredList.length; i++)
+                    containerBox(filteredList[i].storeName,i, filteredList[i].storeImage,
+                        folderList),
+                ],
+              ));
+    }  else{
+               return CircularProgressIndicator(backgroundColor: Colors.white,);
+                  }
+    }
+        )
       ],
     );
   }
