@@ -13,8 +13,12 @@ The Coupon Finder App is a mobile application designed to connect users with the
 - User-friendly Arabic interface
 - Real-time updates and notifications
 - Administrative panel for managing coupons and offers
+ 
 
+## Screenshots
+ 
 ## Installation
+
 Provide instructions on how to clone/download and run the project on a local machine.
 
 ```bash
