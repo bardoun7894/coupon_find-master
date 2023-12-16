@@ -16,6 +16,7 @@ The Coupon Finder App is a mobile application designed to connect users with the
  
 
 ## Screenshots
+<img src="https://github.com/bardoun7894/coupon_find-master/blob/master/26f91bb7-44b8-4d7a-a272-de940aa16542.jpeg" width="300px">
  
 ## Installation
 
