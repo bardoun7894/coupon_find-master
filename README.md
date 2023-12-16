@@ -1,16 +1,24 @@
-# coupon_find
+# Coupon Finder App
 
-find coupons
+## Overview
+The Coupon Finder App is a mobile application designed to connect users with the latest deals and discounts. Developed with the Flutter framework, it offers a seamless experience across both Android and iOS platforms. The app includes an easy-to-navigate interface and is primarily aimed at Arabic-speaking users, with a powerful admin panel for deal management.
 
-## Getting Started
+## Technology Stack
+- **Framework:** Flutter
+- **Programming Language:** Dart
+- **Backend:** Laravel 
+- **Database:** mysql 
+## Features
+- Instant access to the latest coupons and discounts
+- User-friendly Arabic interface
+- Real-time updates and notifications
+- Administrative panel for managing coupons and offers
 
-This project is a starting point for a Flutter application.
+## Installation
+Provide instructions on how to clone/download and run the project on a local machine.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```bash
+git clone [repository-link]
+cd [repository-name]
+flutter pub get
+flutter run
